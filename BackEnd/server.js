@@ -42,6 +42,13 @@ const bookSchema = new mongoose.Schema({
 // Create a model based on the schema
 const bookModel = mongoose.model('joshs_books', bookSchema);
 
+app.put('/api/book/:id', async(req,res)=>{
+  console.log("update: " + req.params.id)
+
+  let book = await bookModel.findByIdAndUpdate(req.params.id, req.body, {new:true});
+  res.send(book);
+})
+
 // Handle POST requests to create a new book
 app.post('/api/book', (req,res)=>{
     console.log(req.body);
