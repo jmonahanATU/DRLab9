@@ -79,6 +79,15 @@ app.get('/api/book/:id', async(req,res)=> {
   res.send(book);
 })
 
+// Handle DELETE requests to delete a specific book by ID
+app.delete('/api/book/:id', async (req, res) => {
+  console.log("delete: " + req.params.id);
+
+    let book = await bookModel.findByIdAndDelete(req.params.id);
+    res.send("Book Deleted" + book);
+    
+});
+
 
 // Start the Express app and listen on the specified port
 app.listen(port, () => {
